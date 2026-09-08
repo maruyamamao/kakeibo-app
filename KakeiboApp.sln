@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37614.0 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakeiboApp", "KakeiboApp\KakeiboApp.csproj", "{9F37CCA6-86E4-401A-80F7-2F2A6EF01E88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F37CCA6-86E4-401A-80F7-2F2A6EF01E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F37CCA6-86E4-401A-80F7-2F2A6EF01E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F37CCA6-86E4-401A-80F7-2F2A6EF01E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F37CCA6-86E4-401A-80F7-2F2A6EF01E88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DED69A7A-1FC4-4E13-8AD0-D7797528938D}
+	EndGlobalSection
+EndGlobal
