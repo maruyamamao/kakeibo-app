@@ -114,7 +114,8 @@
             <Button
                 Text="＋ 収入を登録"
                 FontSize="18"
-                HeightRequest="55" />
+                HeightRequest="55" 
+                Clicked="OnIncomeButtonClicked"/>
 
             <Button
                 Text="＋ 支出を登録"
