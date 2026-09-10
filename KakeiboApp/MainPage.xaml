@@ -34,7 +34,8 @@
                         FontSize="18" />
 
                     <Label
-                        Text="¥100,000"
+                        x:Name="IncomeLabel"
+                        Text="¥0"
                         FontSize="28"
                         FontAttributes="Bold" />
 
