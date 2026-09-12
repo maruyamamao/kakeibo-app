@@ -54,5 +54,9 @@ namespace KakeiboApp
         {
             await Navigation.PushAsync(new ExpensePage());
         }
+        private async void OnHistoryButtonClicked(object? sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HistoryPage());
+        }
     }
 }

@@ -114,16 +114,22 @@
 
             <!-- ボタン -->
             <Button
-                Text="＋ 収入を登録"
+                Text="収入を登録"
                 FontSize="18"
                 HeightRequest="55" 
                 Clicked="OnIncomeButtonClicked"/>
 
             <Button
-                Text="＋ 支出を登録"
+                Text="支出を登録"
                 FontSize="18"
                 HeightRequest="55"
                 Clicked="OnExpenseButtonClicked" />
+
+            <Button
+                Text="収支履歴を見る"
+                FontSize="18"
+                HeightRequest="55"
+                Clicked="OnHistoryButtonClicked" />
 
         </VerticalStackLayout>
     </ScrollView>
