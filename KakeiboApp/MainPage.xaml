@@ -17,10 +17,21 @@
                 HorizontalOptions="Center" />
 
             <!-- 月 -->
-            <Label
-                Text="2026年9月の収支"
-                FontSize="20"
-                HorizontalOptions="Center" />
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="20">
+                <Button
+                    Text="◀"
+                    Clicked="OnPreviousMonthClicked" />
+                <Label
+                    x:Name="MonthLabel"
+                    Text="2026年9月の収支"
+                    FontSize="20"
+                    VerticalOptions="Center" />
+                <Button
+                    Text="▶"
+                    Clicked="OnNextMonthClicked" />
+            </HorizontalStackLayout>
 
             <!-- 収入 -->
             <Border
@@ -74,12 +85,11 @@
                     <Label
                         Text="残高"
                         FontSize="18" />
-
                     <Label
-                        Text="¥65,000"
+                        x:Name="BalanceLabel"
+                        Text="¥0"
                         FontSize="28"
                         FontAttributes="Bold" />
-
                 </VerticalStackLayout>
 
             </Border>
