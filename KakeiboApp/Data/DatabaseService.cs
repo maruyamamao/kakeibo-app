@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SQLite;
+﻿using SQLite;
 using KakeiboApp.Models;
 
 namespace KakeiboApp.Data
@@ -25,16 +20,31 @@ namespace KakeiboApp.Data
         public async Task InitializeAsync()
         {
             await _database.CreateTableAsync<Income>();
+            await _database.CreateTableAsync<Expense>();
         }
 
+        // 収入を追加
         public async Task<int> AddIncomeAsync(Income income)
         {
             return await _database.InsertAsync(income);
         }
 
+        // 収入を取得
         public async Task<List<Income>> GetIncomesAsync()
         {
             return await _database.Table<Income>().ToListAsync();
+        }
+
+        // 支出を追加
+        public async Task<int> AddExpenseAsync(Expense expense)
+        {
+            return await _database.InsertAsync(expense);
+        }
+
+        // 支出を取得
+        public async Task<List<Expense>> GetExpensesAsync()
+        {
+            return await _database.Table<Expense>().ToListAsync();
         }
     }
 }

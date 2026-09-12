@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KakeiboApp.ExpensePage"
+             Title="支出を登録">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <Label
+                Text="支出を登録"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label Text="金額" />
+
+            <Entry
+                x:Name="AmountEntry"
+                Placeholder="金額を入力"
+                Keyboard="Numeric" />
+
+            <Label Text="日付" />
+
+            <DatePicker
+                x:Name="DatePicker" />
+
+            <Label Text="カテゴリ" />
+
+            <Picker
+                x:Name="CategoryPicker"
+                Title="カテゴリを選択">
+
+                <Picker.Items>
+                    <x:String>食費</x:String>
+                    <x:String>日用品</x:String>
+                    <x:String>交通費</x:String>
+                    <x:String>趣味</x:String>
+                    <x:String>その他</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="メモ" />
+
+            <Editor
+                x:Name="MemoEditor"
+                Placeholder="メモを入力"
+                HeightRequest="100" />
+
+            <Button
+                Text="登録"
+                HeightRequest="55"
+                Clicked="OnRegisterClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

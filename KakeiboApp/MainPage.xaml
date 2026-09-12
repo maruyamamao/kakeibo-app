@@ -55,9 +55,10 @@
                         FontSize="18" />
 
                     <Label
-                        Text="¥35,000"
+                        x:Name="ExpenseLabel"
+                        Text="¥0"
                         FontSize="28"
-                        FontAttributes="Bold" />
+                        FontAttributes="Bold"  />
 
                 </VerticalStackLayout>
 
@@ -121,7 +122,8 @@
             <Button
                 Text="＋ 支出を登録"
                 FontSize="18"
-                HeightRequest="55" />
+                HeightRequest="55"
+                Clicked="OnExpenseButtonClicked" />
 
         </VerticalStackLayout>
     </ScrollView>

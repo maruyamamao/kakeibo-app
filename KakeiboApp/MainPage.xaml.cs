@@ -14,6 +14,7 @@ namespace KakeiboApp
             base.OnAppearing();
 
             await LoadIncomeAsync();
+            await LoadExpenseAsync();
         }
 
         private async Task LoadIncomeAsync()
@@ -30,9 +31,28 @@ namespace KakeiboApp
             IncomeLabel.Text = $"¥{totalIncome:N0}";
         }
 
+        private async Task LoadExpenseAsync()
+        {
+            var expenses = await App.Database.GetExpensesAsync();
+
+            decimal totalExpense = 0;
+
+            foreach (var expense in expenses)
+            {
+                totalExpense += expense.Amount;
+            }
+
+            ExpenseLabel.Text = $"¥{totalExpense:N0}";
+        }
+
         private async void OnIncomeButtonClicked(object? sender, EventArgs e)
         {
             await Navigation.PushAsync(new IncomePage());
+        }
+
+        private async void OnExpenseButtonClicked(object? sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ExpensePage());
         }
     }
 }
