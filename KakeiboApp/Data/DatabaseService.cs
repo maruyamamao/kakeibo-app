@@ -35,16 +35,48 @@ namespace KakeiboApp.Data
             return await _database.Table<Income>().ToListAsync();
         }
 
-        // 支出を追加
+        public async Task<Income?> GetIncomeAsync(int id)
+        {
+            return await _database
+                .Table<Income>()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<int> AddExpenseAsync(Expense expense)
         {
             return await _database.InsertAsync(expense);
         }
 
-        // 支出を取得
         public async Task<List<Expense>> GetExpensesAsync()
         {
             return await _database.Table<Expense>().ToListAsync();
+        }
+
+        public async Task<Expense?> GetExpenseAsync(int id)
+        {
+            return await _database
+                .Table<Expense>()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+        }
+        public async Task<int> UpdateIncomeAsync(Income income)
+        {
+            return await _database.UpdateAsync(income);
+        }
+
+        public async Task<int> UpdateExpenseAsync(Expense expense)
+        {
+            return await _database.UpdateAsync(expense);
+        }
+        public async Task<int> DeleteIncomeAsync(Income income)
+        {
+            return await _database.DeleteAsync(income);
+        }
+
+        public async Task<int> DeleteExpenseAsync(Expense expense)
+        {
+            return await _database.DeleteAsync(expense);
         }
     }
 }
