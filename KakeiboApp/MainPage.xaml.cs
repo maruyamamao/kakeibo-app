@@ -16,13 +16,12 @@ namespace KakeiboApp
         {
             base.OnAppearing();
 
-            await UpdateBorrowedAmountAsync();
-            await UpdateCarriedOverAmountAsync();
+            await UpdateBudgetAdjustmentAsync();
             await LoadMonthlyDataAsync();
         }
 
-        // 前月の予算超過分を翌月の前借りとして登録
-        private async Task UpdateBorrowedAmountAsync()
+        // 前月の結果から、翌月の前借り・繰り越しを自動計算
+        private async Task UpdateBudgetAdjustmentAsync()
         {
             var expenses =
                 await App.Database.GetExpensesAsync();
@@ -55,76 +54,23 @@ namespace KakeiboApp
                     previousMonth.Year,
                     previousMonth.Month);
 
-            decimal previousBudgetAmount =
-                previousBudget?.Amount ?? 0;
-
-            // 前月の予算超過額
-            decimal borrowedAmount =
-                previousTotalExpense - previousBudgetAmount;
-
-            // マイナスにはしない
-            if (borrowedAmount < 0)
-            {
-                borrowedAmount = 0;
-            }
-
-            // 翌月の前借り額として保存
-            await App.Database.SetBorrowedAmountAsync(
-                _currentMonth.Year,
-                _currentMonth.Month,
-                borrowedAmount);
-        }
-
-        // 前月の余った予算を翌月へ繰り越す
-        private async Task UpdateCarriedOverAmountAsync()
-        {
-            var expenses =
-                await App.Database.GetExpensesAsync();
-
-            // 前月
-            var previousMonth =
-                _currentMonth.AddMonths(-1);
-
-            var startDate = new DateTime(
-                previousMonth.Year,
-                previousMonth.Month,
-                1);
-
-            var endDate =
-                startDate.AddMonths(1);
-
-            // 前月の支出
-            var previousMonthExpenses = expenses
-                .Where(x =>
-                    x.Date >= startDate &&
-                    x.Date < endDate)
-                .ToList();
-
-            decimal previousTotalExpense =
-                previousMonthExpenses.Sum(x => x.Amount);
-
-            // 前月の予算
-            var previousBudget =
-                await App.Database.GetBudgetAsync(
-                    previousMonth.Year,
-                    previousMonth.Month);
-
-            // 前月の予算がなければ繰り越しなし
+            // 前月の予算がなければ何もしない
             if (previousBudget == null)
             {
                 return;
             }
 
+            // 前月の通常予算
             decimal previousBudgetAmount =
                 previousBudget.Amount;
 
-            // 前月からの前借り分
-            decimal previousBorrowedAmount =
-                previousBudget.BorrowedAmount;
-
-            // 前月からの繰り越し分
+            // 前月に繰り越されていた金額
             decimal previousCarriedOverAmount =
                 previousBudget.CarriedOverAmount;
+
+            // 前月に前借りされていた金額
+            decimal previousBorrowedAmount =
+                previousBudget.BorrowedAmount;
 
             // 前月に実際に使える予算
             decimal previousAvailableBudget =
@@ -132,21 +78,57 @@ namespace KakeiboApp
                 + previousCarriedOverAmount
                 - previousBorrowedAmount;
 
-            // 前月の余り
-            decimal carriedOverAmount =
-                previousAvailableBudget - previousTotalExpense;
+            // 前月の差額
+            decimal difference =
+                previousAvailableBudget
+                - previousTotalExpense;
 
-            // マイナスにはしない
-            if (carriedOverAmount < 0)
+            decimal carriedOverAmount = 0;
+            decimal borrowedAmount = 0;
+
+            // 余った場合 → 翌月へ繰り越し
+            if (difference > 0)
             {
-                carriedOverAmount = 0;
+                carriedOverAmount = difference;
+            }
+            // 予算を超えた場合 → 翌月から前借り
+            else if (difference < 0)
+            {
+                borrowedAmount = Math.Abs(difference);
             }
 
-            // 翌月の繰り越し額として保存
-            await App.Database.SetCarriedOverAmountAsync(
-                _currentMonth.Year,
-                _currentMonth.Month,
-                carriedOverAmount);
+            // 翌月の予算情報を取得
+            var currentBudget =
+                await App.Database.GetBudgetAsync(
+                    _currentMonth.Year,
+                    _currentMonth.Month);
+
+            // 翌月の予算がまだない場合
+            if (currentBudget == null)
+            {
+                currentBudget = new Budget
+                {
+                    Year = _currentMonth.Year,
+                    Month = _currentMonth.Month,
+                    Amount = 0,
+                    BorrowedAmount = borrowedAmount,
+                    CarriedOverAmount = carriedOverAmount
+                };
+
+                await App.Database.AddBudgetAsync(currentBudget);
+            }
+            else
+            {
+                // 翌月の前借り・繰り越しを更新
+                currentBudget.BorrowedAmount =
+                    borrowedAmount;
+
+                currentBudget.CarriedOverAmount =
+                    carriedOverAmount;
+
+                await App.Database.UpdateBudgetAsync(
+                    currentBudget);
+            }
         }
 
         // 現在の月の収支・予算を画面に表示
@@ -282,8 +264,7 @@ namespace KakeiboApp
             _currentMonth =
                 _currentMonth.AddMonths(1);
 
-            await UpdateBorrowedAmountAsync();
-            await UpdateCarriedOverAmountAsync();
+            await UpdateBudgetAdjustmentAsync();
             await LoadMonthlyDataAsync();
         }
 
@@ -295,8 +276,7 @@ namespace KakeiboApp
             _currentMonth =
                 _currentMonth.AddMonths(-1);
 
-            await UpdateBorrowedAmountAsync();
-            await UpdateCarriedOverAmountAsync();
+            await UpdateBudgetAdjustmentAsync();
             await LoadMonthlyDataAsync();
         }
 
