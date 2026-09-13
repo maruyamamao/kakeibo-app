@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KakeiboApp.BudgetPage"
+             Title="予算設定">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <Label
+                Text="🎯 月間予算を設定"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="MonthLabel"
+                Text="2026年9月の予算"
+                FontSize="20"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="予算金額" />
+
+            <Entry
+                x:Name="BudgetEntry"
+                Placeholder="予算を入力"
+                Keyboard="Numeric" />
+
+            <Button
+                Text="保存"
+                HeightRequest="55"
+                Clicked="OnSaveClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

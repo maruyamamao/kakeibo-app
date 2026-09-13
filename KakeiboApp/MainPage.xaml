@@ -9,31 +9,32 @@
             Padding="20"
             Spacing="20">
 
-            <!-- タイトル -->
             <Label
                 Text="家計簿"
                 FontSize="32"
                 FontAttributes="Bold"
                 HorizontalOptions="Center" />
 
-            <!-- 月 -->
             <HorizontalStackLayout
                 HorizontalOptions="Center"
                 Spacing="20">
+
                 <Button
                     Text="◀"
                     Clicked="OnPreviousMonthClicked" />
+
                 <Label
                     x:Name="MonthLabel"
                     Text="2026年9月の収支"
                     FontSize="20"
                     VerticalOptions="Center" />
+
                 <Button
                     Text="▶"
                     Clicked="OnNextMonthClicked" />
+
             </HorizontalStackLayout>
 
-            <!-- 収入 -->
             <Border
                 StrokeShape="RoundRectangle 15"
                 Padding="20">
@@ -54,7 +55,6 @@
 
             </Border>
 
-            <!-- 支出 -->
             <Border
                 StrokeShape="RoundRectangle 15"
                 Padding="20">
@@ -69,13 +69,12 @@
                         x:Name="ExpenseLabel"
                         Text="¥0"
                         FontSize="28"
-                        FontAttributes="Bold"  />
+                        FontAttributes="Bold" />
 
                 </VerticalStackLayout>
 
             </Border>
 
-            <!-- 残高 -->
             <Border
                 StrokeShape="RoundRectangle 15"
                 Padding="20">
@@ -85,11 +84,13 @@
                     <Label
                         Text="残高"
                         FontSize="18" />
+
                     <Label
                         x:Name="BalanceLabel"
                         Text="¥0"
                         FontSize="28"
                         FontAttributes="Bold" />
+
                 </VerticalStackLayout>
 
             </Border>
@@ -107,39 +108,47 @@
                         FontAttributes="Bold" />
 
                     <Label
-                        Text="予算：¥50,000"
+                        x:Name="BudgetLabel"
+                        Text="予算：¥0"
                         FontSize="18" />
 
                     <Label
-                        Text="使用額：¥35,000"
+                        x:Name="BudgetUsedLabel"
+                        Text="使用額：¥0"
                         FontSize="18" />
 
                     <Label
-                        Text="残り：¥15,000"
+                        x:Name="BudgetRemainingLabel"
+                        Text="残り：¥0"
                         FontSize="18" />
 
                 </VerticalStackLayout>
 
             </Border>
 
-            <!-- ボタン -->
             <Button
-                Text="収入を登録"
+                Text="＋ 収入を登録"
                 FontSize="18"
-                HeightRequest="55" 
-                Clicked="OnIncomeButtonClicked"/>
+                HeightRequest="55"
+                Clicked="OnIncomeButtonClicked" />
 
             <Button
-                Text="支出を登録"
+                Text="＋ 支出を登録"
                 FontSize="18"
                 HeightRequest="55"
                 Clicked="OnExpenseButtonClicked" />
 
             <Button
-                Text="収支履歴を見る"
+                Text="📋 収支履歴を見る"
                 FontSize="18"
                 HeightRequest="55"
                 Clicked="OnHistoryButtonClicked" />
+
+            <Button
+                Text="🎯 月間予算を設定"
+                FontSize="18"
+                HeightRequest="55"
+                Clicked="OnBudgetButtonClicked" />
 
         </VerticalStackLayout>
     </ScrollView>

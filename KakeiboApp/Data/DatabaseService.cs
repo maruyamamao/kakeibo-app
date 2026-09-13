@@ -21,6 +21,7 @@ namespace KakeiboApp.Data
         {
             await _database.CreateTableAsync<Income>();
             await _database.CreateTableAsync<Expense>();
+            await _database.CreateTableAsync<Budget>();
         }
 
         // 収入を追加
@@ -77,6 +78,23 @@ namespace KakeiboApp.Data
         public async Task<int> DeleteExpenseAsync(Expense expense)
         {
             return await _database.DeleteAsync(expense);
+        }
+        public async Task<Budget?> GetBudgetAsync(int year, int month)
+        {
+            return await _database
+                .Table<Budget>()
+                .Where(x => x.Year == year && x.Month == month)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> AddBudgetAsync(Budget budget)
+        {
+            return await _database.InsertAsync(budget);
+        }
+
+        public async Task<int> UpdateBudgetAsync(Budget budget)
+        {
+            return await _database.UpdateAsync(budget);
         }
     }
 }
