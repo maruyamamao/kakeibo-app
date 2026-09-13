@@ -204,6 +204,42 @@ namespace KakeiboApp
             decimal budgetRemaining =
                 availableBudget - totalExpense;
 
+            // =========================
+            // 予算通知
+            // =========================
+
+            BudgetAlertBorder.IsVisible = false;
+
+            if (budgetRemaining < 0 && borrowedAmount > 0)
+            {
+                BudgetAlertLabel.Text =
+                    $"⚠️ 予算を¥{Math.Abs(budgetRemaining):N0}超過しています。\n" +
+                    $"¥{borrowedAmount:N0}を前借りしています。";
+
+                BudgetAlertBorder.IsVisible = true;
+            }
+            else if (budgetRemaining < 0)
+            {
+                BudgetAlertLabel.Text =
+                    $"⚠️ 予算を¥{Math.Abs(budgetRemaining):N0}超過しています。";
+
+                BudgetAlertBorder.IsVisible = true;
+            }
+            else if (borrowedAmount > 0)
+            {
+                BudgetAlertLabel.Text =
+                    $"⚠️ 前月から¥{borrowedAmount:N0}の予算を前借りしています。";
+
+                BudgetAlertBorder.IsVisible = true;
+            }
+            else if (carriedOverAmount > 0)
+            {
+                BudgetAlertLabel.Text =
+                    $"✨ 前月から¥{carriedOverAmount:N0}の予算を繰り越しています。";
+
+                BudgetAlertBorder.IsVisible = true;
+            }
+
             // 月
             MonthLabel.Text =
                 $"{_currentMonth:yyyy年M月}の収支";

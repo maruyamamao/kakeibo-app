@@ -122,6 +122,19 @@
                         Text="残り：¥0"
                         FontSize="18" />
 
+                    <Border
+                        x:Name="BudgetAlertBorder"
+                        StrokeShape="RoundRectangle 15"
+                        Padding="15"
+                        IsVisible="False">
+
+                        <Label
+                            x:Name="BudgetAlertLabel"
+                            FontSize="16"
+                            FontAttributes="Bold" />
+
+                    </Border>
+
                 </VerticalStackLayout>
 
             </Border>
