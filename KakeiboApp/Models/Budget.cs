@@ -15,5 +15,8 @@ namespace KakeiboApp.Models
 
         // 前月から前借りした金額
         public decimal BorrowedAmount { get; set; }
+
+        // 前月から繰り越された金額
+        public decimal CarriedOverAmount { get; set; }
     }
 }

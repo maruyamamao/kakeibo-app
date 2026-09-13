@@ -122,5 +122,31 @@ namespace KakeiboApp.Data
 
             return await UpdateBudgetAsync(budget);
         }
+        // 繰り越し額を設定
+        public async Task<int> SetCarriedOverAmountAsync(
+            int year,
+            int month,
+            decimal carriedOverAmount)
+        {
+            var budget = await GetBudgetAsync(year, month);
+
+            if (budget == null)
+            {
+                budget = new Budget
+                {
+                    Year = year,
+                    Month = month,
+                    Amount = 0,
+                    BorrowedAmount = 0,
+                    CarriedOverAmount = carriedOverAmount
+                };
+
+                return await AddBudgetAsync(budget);
+            }
+
+            budget.CarriedOverAmount = carriedOverAmount;
+
+            return await UpdateBudgetAsync(budget);
+        }
     }
 }

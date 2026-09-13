@@ -17,6 +17,7 @@ namespace KakeiboApp
             base.OnAppearing();
 
             await UpdateBorrowedAmountAsync();
+            await UpdateCarriedOverAmountAsync();
             await LoadMonthlyDataAsync();
         }
 
@@ -74,6 +75,81 @@ namespace KakeiboApp
                 borrowedAmount);
         }
 
+        // 前月の余った予算を翌月へ繰り越す
+        private async Task UpdateCarriedOverAmountAsync()
+        {
+            var expenses =
+                await App.Database.GetExpensesAsync();
+
+            // 前月
+            var previousMonth =
+                _currentMonth.AddMonths(-1);
+
+            var startDate = new DateTime(
+                previousMonth.Year,
+                previousMonth.Month,
+                1);
+
+            var endDate =
+                startDate.AddMonths(1);
+
+            // 前月の支出
+            var previousMonthExpenses = expenses
+                .Where(x =>
+                    x.Date >= startDate &&
+                    x.Date < endDate)
+                .ToList();
+
+            decimal previousTotalExpense =
+                previousMonthExpenses.Sum(x => x.Amount);
+
+            // 前月の予算
+            var previousBudget =
+                await App.Database.GetBudgetAsync(
+                    previousMonth.Year,
+                    previousMonth.Month);
+
+            // 前月の予算がなければ繰り越しなし
+            if (previousBudget == null)
+            {
+                return;
+            }
+
+            decimal previousBudgetAmount =
+                previousBudget.Amount;
+
+            // 前月からの前借り分
+            decimal previousBorrowedAmount =
+                previousBudget.BorrowedAmount;
+
+            // 前月からの繰り越し分
+            decimal previousCarriedOverAmount =
+                previousBudget.CarriedOverAmount;
+
+            // 前月に実際に使える予算
+            decimal previousAvailableBudget =
+                previousBudgetAmount
+                + previousCarriedOverAmount
+                - previousBorrowedAmount;
+
+            // 前月の余り
+            decimal carriedOverAmount =
+                previousAvailableBudget - previousTotalExpense;
+
+            // マイナスにはしない
+            if (carriedOverAmount < 0)
+            {
+                carriedOverAmount = 0;
+            }
+
+            // 翌月の繰り越し額として保存
+            await App.Database.SetCarriedOverAmountAsync(
+                _currentMonth.Year,
+                _currentMonth.Month,
+                carriedOverAmount);
+        }
+
+        // 現在の月の収支・予算を画面に表示
         private async Task LoadMonthlyDataAsync()
         {
             // 収入・支出を取得
@@ -114,6 +190,7 @@ namespace KakeiboApp
             decimal totalExpense =
                 monthlyExpenses.Sum(x => x.Amount);
 
+            // 収支残高
             decimal balance =
                 totalIncome - totalExpense;
 
@@ -131,9 +208,15 @@ namespace KakeiboApp
             decimal borrowedAmount =
                 budget?.BorrowedAmount ?? 0;
 
+            // 前月からの繰り越し額
+            decimal carriedOverAmount =
+                budget?.CarriedOverAmount ?? 0;
+
             // 実際に今月使える予算
             decimal availableBudget =
-                budgetAmount - borrowedAmount;
+                budgetAmount
+                + carriedOverAmount
+                - borrowedAmount;
 
             // 予算の残り
             decimal budgetRemaining =
@@ -160,10 +243,25 @@ namespace KakeiboApp
                 $"予算：¥{budgetAmount:N0}";
 
             // 使用額
-            if (borrowedAmount > 0)
+            if (carriedOverAmount > 0 &&
+                borrowedAmount > 0)
             {
                 BudgetUsedLabel.Text =
-                    $"前借り：¥{borrowedAmount:N0} / 使用額：¥{totalExpense:N0}";
+                    $"繰り越し：¥{carriedOverAmount:N0} / " +
+                    $"前借り：¥{borrowedAmount:N0} / " +
+                    $"使用額：¥{totalExpense:N0}";
+            }
+            else if (carriedOverAmount > 0)
+            {
+                BudgetUsedLabel.Text =
+                    $"繰り越し：¥{carriedOverAmount:N0} / " +
+                    $"使用額：¥{totalExpense:N0}";
+            }
+            else if (borrowedAmount > 0)
+            {
+                BudgetUsedLabel.Text =
+                    $"前借り：¥{borrowedAmount:N0} / " +
+                    $"使用額：¥{totalExpense:N0}";
             }
             else
             {
@@ -176,17 +274,7 @@ namespace KakeiboApp
                 $"残り：¥{budgetRemaining:N0}";
         }
 
-        private async void OnPreviousMonthClicked(
-            object? sender,
-            EventArgs e)
-        {
-            _currentMonth =
-                _currentMonth.AddMonths(-1);
-
-            await UpdateBorrowedAmountAsync();
-            await LoadMonthlyDataAsync();
-        }
-
+        // 翌月へ
         private async void OnNextMonthClicked(
             object? sender,
             EventArgs e)
@@ -195,9 +283,24 @@ namespace KakeiboApp
                 _currentMonth.AddMonths(1);
 
             await UpdateBorrowedAmountAsync();
+            await UpdateCarriedOverAmountAsync();
             await LoadMonthlyDataAsync();
         }
 
+        // 前月へ
+        private async void OnPreviousMonthClicked(
+            object? sender,
+            EventArgs e)
+        {
+            _currentMonth =
+                _currentMonth.AddMonths(-1);
+
+            await UpdateBorrowedAmountAsync();
+            await UpdateCarriedOverAmountAsync();
+            await LoadMonthlyDataAsync();
+        }
+
+        // 収入登録
         private async void OnIncomeButtonClicked(
             object? sender,
             EventArgs e)
@@ -206,6 +309,7 @@ namespace KakeiboApp
                 new IncomePage());
         }
 
+        // 支出登録
         private async void OnExpenseButtonClicked(
             object? sender,
             EventArgs e)
@@ -214,6 +318,7 @@ namespace KakeiboApp
                 new ExpensePage());
         }
 
+        // 収支履歴
         private async void OnHistoryButtonClicked(
             object? sender,
             EventArgs e)
@@ -222,6 +327,7 @@ namespace KakeiboApp
                 new HistoryPage());
         }
 
+        // 月間予算設定
         private async void OnBudgetButtonClicked(
             object? sender,
             EventArgs e)
