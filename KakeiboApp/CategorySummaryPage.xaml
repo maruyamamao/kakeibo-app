@@ -9,12 +9,14 @@
             Padding="20"
             Spacing="20">
 
+            <!-- タイトル -->
             <Label
                 Text="カテゴリ別支出"
                 FontSize="28"
                 FontAttributes="Bold"
                 HorizontalOptions="Center" />
 
+            <!-- 月切り替え -->
             <HorizontalStackLayout
                 HorizontalOptions="Center"
                 Spacing="20">
@@ -35,10 +37,35 @@
 
             </HorizontalStackLayout>
 
+            <!-- カテゴリ別支出グラフ -->
+            <Border
+                StrokeShape="RoundRectangle 20"
+                Padding="20">
+
+                <VerticalStackLayout
+                    Spacing="15">
+
+                    <Label
+                        Text="カテゴリ別支出グラフ"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+
+                    <!-- グラフをここに追加 -->
+                    <VerticalStackLayout
+                        x:Name="ChartList"
+                        Spacing="12" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- カテゴリ一覧 -->
             <VerticalStackLayout
                 x:Name="CategoryList"
                 Spacing="10" />
 
+            <!-- 合計 -->
             <Border
                 StrokeShape="RoundRectangle 15"
                 Padding="20">
