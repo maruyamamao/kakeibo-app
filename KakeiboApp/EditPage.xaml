@@ -2,66 +2,167 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KakeiboApp.EditPage"
-             Title="収支を編集">
+             Title="収支を編集"
+             BackgroundColor="#F5F9FC">
 
     <ScrollView>
+
         <VerticalStackLayout
-            Padding="20"
-            Spacing="15">
+            Padding="20,15,20,30"
+            Spacing="16">
 
-            <Label
-                Text="✏️ 収支を編集"
-                FontSize="28"
-                FontAttributes="Bold"
-                HorizontalOptions="Center" />
+            <!-- ヘッダー -->
+            <VerticalStackLayout
+                Spacing="2"
+                Margin="0,5,0,5">
 
-            <Label Text="金額" />
+                <Label
+                    Text="収支を編集"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="#1F2937" />
 
-            <Entry
-                x:Name="AmountEntry"
-                Placeholder="金額を入力"
-                Keyboard="Numeric" />
+                <Label
+                    Text="登録済みの収支情報を編集できます"
+                    FontSize="14"
+                    TextColor="#7B8794" />
 
-            <Label Text="日付" />
+            </VerticalStackLayout>
 
-            <DatePicker
-                x:Name="DatePicker" />
 
-            <Label Text="カテゴリ" />
+            <!-- 入力フォーム -->
+            <Border
+                BackgroundColor="White"
+                Stroke="#DDE7F0"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                Padding="20">
 
-            <Picker
-                x:Name="CategoryPicker"
-                Title="カテゴリを選択">
+                <VerticalStackLayout
+                    Spacing="18">
 
-                <Picker.Items>
-                    <x:String>給料</x:String>
-                    <x:String>食費</x:String>
-                    <x:String>日用品</x:String>
-                    <x:String>交通費</x:String>
-                    <x:String>趣味</x:String>
-                    <x:String>アルバイト</x:String>
-                    <x:String>その他</x:String>
-                </Picker.Items>
-            </Picker>
+                    <!-- 金額 -->
+                    <VerticalStackLayout Spacing="7">
 
-            <Label Text="メモ" />
+                        <Label
+                            Text="金額"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#334155" />
 
-            <Editor
-                x:Name="MemoEditor"
-                Placeholder="メモを入力"
-                HeightRequest="100" />
+                        <Entry
+                            x:Name="AmountEntry"
+                            Placeholder="金額を入力"
+                            Keyboard="Numeric"
+                            FontSize="18"
+                            HeightRequest="50"
+                            TextColor="#1F2937"
+                            PlaceholderColor="#A0AAB4" />
 
+                    </VerticalStackLayout>
+
+
+                    <!-- 日付 -->
+                    <VerticalStackLayout Spacing="7">
+
+                        <Label
+                            Text="日付"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#334155" />
+
+                        <DatePicker
+                            x:Name="DatePicker"
+                            FontSize="17"
+                            HeightRequest="50"
+                            TextColor="#334155" />
+
+                    </VerticalStackLayout>
+
+
+                    <!-- カテゴリ -->
+                    <VerticalStackLayout Spacing="7">
+
+                        <Label
+                            Text="カテゴリ"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#334155" />
+
+                        <Picker
+                            x:Name="CategoryPicker"
+                            Title="カテゴリを選択"
+                            FontSize="17"
+                            HeightRequest="50"
+                            TextColor="#334155">
+
+                            <Picker.Items>
+                                <x:String>給料</x:String>
+                                <x:String>食費</x:String>
+                                <x:String>日用品</x:String>
+                                <x:String>交通費</x:String>
+                                <x:String>趣味</x:String>
+                                <x:String>アルバイト</x:String>
+                                <x:String>その他</x:String>
+                            </Picker.Items>
+
+                        </Picker>
+
+                    </VerticalStackLayout>
+
+
+                    <!-- メモ -->
+                    <VerticalStackLayout Spacing="7">
+
+                        <Label
+                            Text="メモ"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="#334155" />
+
+                        <Editor
+                            x:Name="MemoEditor"
+                            Placeholder="メモを入力"
+                            HeightRequest="110"
+                            FontSize="17"
+                            TextColor="#1F2937"
+                            PlaceholderColor="#A0AAB4" />
+
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+
+            <!-- 保存 -->
             <Button
-                Text="保存"
-                HeightRequest="55"
+                Text="✓ 変更を保存"
+                FontSize="17"
+                FontAttributes="Bold"
+                HeightRequest="56"
+                CornerRadius="14"
+                BackgroundColor="#7DB7E8"
+                TextColor="White"
+                Margin="0,4,0,0"
                 Clicked="OnSaveClicked" />
 
+
+            <!-- 削除 -->
             <Button
-                Text="削除"
-                HeightRequest="55"
+                Text="🗑️ この収支を削除"
+                FontSize="16"
+                FontAttributes="Bold"
+                HeightRequest="52"
+                CornerRadius="14"
+                BackgroundColor="#FFF5F5"
+                BorderColor="#F0CACA"
+                BorderWidth="1"
+                TextColor="#C66B6B"
                 Clicked="OnDeleteClicked" />
 
         </VerticalStackLayout>
+
     </ScrollView>
 
 </ContentPage>

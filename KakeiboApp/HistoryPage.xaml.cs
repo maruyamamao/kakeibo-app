@@ -23,14 +23,31 @@ namespace KakeiboApp
 
             HistoryLayout.Children.Clear();
 
+            // =========================
             // 収入を表示
+            // =========================
+
             foreach (var income in incomes)
             {
                 var button = new Button
                 {
-                    Text = $"💰 +¥{income.Amount:N0}　{income.Category}\n" +
-                           $"{income.Date:yyyy/MM/dd}　{income.Memo}",
-                    FontSize = 16
+                    Text =
+                        $"＋ ¥{income.Amount:N0}　{income.Category}\n" +
+                        $"{income.Date:yyyy/MM/dd}　{income.Memo}",
+
+                    FontSize = 16,
+                    FontAttributes = FontAttributes.Bold,
+
+                    BackgroundColor = Color.FromArgb("#F0FAF4"),
+                    TextColor = Color.FromArgb("#277A45"),
+
+                    BorderColor = Color.FromArgb("#C8E8D3"),
+                    BorderWidth = 1,
+
+                    CornerRadius = 14,
+                    HeightRequest = 70,
+
+                    HorizontalOptions = LayoutOptions.Fill
                 };
 
                 button.Clicked += async (sender, e) =>
@@ -43,14 +60,31 @@ namespace KakeiboApp
                 HistoryLayout.Children.Add(button);
             }
 
+            // =========================
             // 支出を表示
+            // =========================
+
             foreach (var expense in expenses)
             {
                 var button = new Button
                 {
-                    Text = $"💸 -¥{expense.Amount:N0}　{expense.Category}\n" +
-                           $"{expense.Date:yyyy/MM/dd}　{expense.Memo}",
-                    FontSize = 16
+                    Text =
+                        $"－ ¥{expense.Amount:N0}　{expense.Category}\n" +
+                        $"{expense.Date:yyyy/MM/dd}　{expense.Memo}",
+
+                    FontSize = 16,
+                    FontAttributes = FontAttributes.Bold,
+
+                    BackgroundColor = Color.FromArgb("#FFF6EF"),
+                    TextColor = Color.FromArgb("#C96A32"),
+
+                    BorderColor = Color.FromArgb("#F2D6BE"),
+                    BorderWidth = 1,
+
+                    CornerRadius = 14,
+                    HeightRequest = 70,
+
+                    HorizontalOptions = LayoutOptions.Fill
                 };
 
                 button.Clicked += async (sender, e) =>

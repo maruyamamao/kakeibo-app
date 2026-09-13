@@ -2,28 +2,60 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KakeiboApp.HistoryPage"
-             Title="収支履歴">
+             Title="収支履歴"
+             BackgroundColor="#F5F9FC">
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="20"
-            Spacing="15">
 
-            <Label
-                Text="📋 収支履歴"
-                FontSize="28"
-                FontAttributes="Bold"
-                HorizontalOptions="Center" />
+        <VerticalStackLayout
+            Padding="20,15,20,30"
+            Spacing="16">
+
+            <!-- ========================= -->
+            <!-- ヘッダー -->
+            <!-- ========================= -->
 
             <VerticalStackLayout
-                x:Name="HistoryLayout"
-                Spacing="10">
+                Spacing="2"
+                Margin="0,5,0,5">
 
-                <!-- ここに収支履歴を表示する -->
+                <Label
+                    Text="収支履歴"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="#1F2937" />
+
+                <Label
+                    Text="これまでの収入・支出を確認できます"
+                    FontSize="14"
+                    TextColor="#7B8794" />
 
             </VerticalStackLayout>
 
+
+            <!-- ========================= -->
+            <!-- 履歴一覧 -->
+            <!-- ========================= -->
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#DDE7F0"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                Padding="16">
+
+                <VerticalStackLayout
+                    x:Name="HistoryLayout"
+                    Spacing="10">
+
+                    <!-- ここに収支履歴を表示する -->
+
+                </VerticalStackLayout>
+
+            </Border>
+
         </VerticalStackLayout>
+
     </ScrollView>
 
 </ContentPage>
