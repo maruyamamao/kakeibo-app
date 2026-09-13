@@ -150,6 +150,11 @@
                 HeightRequest="55"
                 Clicked="OnBudgetButtonClicked" />
 
+            <Button
+                Text="📊 カテゴリ別集計"
+                FontSize="18"
+                HeightRequest="55"
+                Clicked="OnCategorySummaryButtonClicked" />
         </VerticalStackLayout>
     </ScrollView>
 

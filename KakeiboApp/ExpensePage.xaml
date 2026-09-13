@@ -32,16 +32,19 @@
             <Picker
                 x:Name="CategoryPicker"
                 Title="カテゴリを選択">
-
                 <Picker.Items>
                     <x:String>食費</x:String>
-                    <x:String>日用品</x:String>
+                    <x:String>住居・光熱費</x:String>
                     <x:String>交通費</x:String>
-                    <x:String>趣味</x:String>
+                    <x:String>日用品</x:String>
+                    <x:String>医療・健康</x:String>
+                    <x:String>衣服</x:String>
+                    <x:String>趣味・娯楽</x:String>
+                    <x:String>通信費</x:String>
+                    <x:String>美容</x:String>
                     <x:String>その他</x:String>
                 </Picker.Items>
             </Picker>
-
             <Label Text="メモ" />
 
             <Editor

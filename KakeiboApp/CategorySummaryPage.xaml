@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="KakeiboApp.CategorySummaryPage"
+             Title="カテゴリ別集計">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="20">
+
+            <Label
+                Text="カテゴリ別支出"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="20">
+
+                <Button
+                    Text="◀"
+                    Clicked="OnPreviousMonthClicked" />
+
+                <Label
+                    x:Name="MonthLabel"
+                    Text="2026年9月"
+                    FontSize="20"
+                    VerticalOptions="Center" />
+
+                <Button
+                    Text="▶"
+                    Clicked="OnNextMonthClicked" />
+
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout
+                x:Name="CategoryList"
+                Spacing="10" />
+
+            <Border
+                StrokeShape="RoundRectangle 15"
+                Padding="20">
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="今月の支出合計"
+                        FontSize="18" />
+
+                    <Label
+                        x:Name="TotalExpenseLabel"
+                        Text="¥0"
+                        FontSize="28"
+                        FontAttributes="Bold" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

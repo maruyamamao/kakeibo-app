@@ -315,5 +315,12 @@ namespace KakeiboApp
             await Navigation.PushAsync(
                 new BudgetPage(_currentMonth));
         }
+        private async void OnCategorySummaryButtonClicked(
+            object? sender,
+            EventArgs e)
+        {
+            await Navigation.PushAsync(
+                new CategorySummaryPage());
+        }
     }
 }
