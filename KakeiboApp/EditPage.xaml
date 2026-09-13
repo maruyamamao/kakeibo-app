@@ -93,7 +93,7 @@
                             x:Name="CategoryPicker"
                             Title="カテゴリを選択"
                             FontSize="17"
-                            HeightRequest="50"
+                            HeightRequest="70"
                             TextColor="#334155">
 
                             <Picker.Items>
