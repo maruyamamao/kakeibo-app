@@ -12,5 +12,8 @@ namespace KakeiboApp.Models
         public int Month { get; set; }
 
         public decimal Amount { get; set; }
+
+        // 前月から前借りした金額
+        public decimal BorrowedAmount { get; set; }
     }
 }

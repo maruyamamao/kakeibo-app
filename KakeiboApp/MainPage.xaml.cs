@@ -16,7 +16,62 @@ namespace KakeiboApp
         {
             base.OnAppearing();
 
+            await UpdateBorrowedAmountAsync();
             await LoadMonthlyDataAsync();
+        }
+
+        // 前月の予算超過分を翌月の前借りとして登録
+        private async Task UpdateBorrowedAmountAsync()
+        {
+            var expenses =
+                await App.Database.GetExpensesAsync();
+
+            // 前月
+            var previousMonth =
+                _currentMonth.AddMonths(-1);
+
+            var startDate = new DateTime(
+                previousMonth.Year,
+                previousMonth.Month,
+                1);
+
+            var endDate =
+                startDate.AddMonths(1);
+
+            // 前月の支出
+            var previousMonthExpenses = expenses
+                .Where(x =>
+                    x.Date >= startDate &&
+                    x.Date < endDate)
+                .ToList();
+
+            decimal previousTotalExpense =
+                previousMonthExpenses.Sum(x => x.Amount);
+
+            // 前月の予算
+            var previousBudget =
+                await App.Database.GetBudgetAsync(
+                    previousMonth.Year,
+                    previousMonth.Month);
+
+            decimal previousBudgetAmount =
+                previousBudget?.Amount ?? 0;
+
+            // 前月の予算超過額
+            decimal borrowedAmount =
+                previousTotalExpense - previousBudgetAmount;
+
+            // マイナスにはしない
+            if (borrowedAmount < 0)
+            {
+                borrowedAmount = 0;
+            }
+
+            // 翌月の前借り額として保存
+            await App.Database.SetBorrowedAmountAsync(
+                _currentMonth.Year,
+                _currentMonth.Month,
+                borrowedAmount);
         }
 
         private async Task LoadMonthlyDataAsync()
@@ -35,7 +90,8 @@ namespace KakeiboApp
                 1);
 
             // 次の月の開始日
-            var endDate = startDate.AddMonths(1);
+            var endDate =
+                startDate.AddMonths(1);
 
             // 今月の収入
             var monthlyIncomes = incomes
@@ -71,9 +127,17 @@ namespace KakeiboApp
             decimal budgetAmount =
                 budget?.Amount ?? 0;
 
+            // 前月からの前借り額
+            decimal borrowedAmount =
+                budget?.BorrowedAmount ?? 0;
+
+            // 実際に今月使える予算
+            decimal availableBudget =
+                budgetAmount - borrowedAmount;
+
             // 予算の残り
             decimal budgetRemaining =
-                budgetAmount - totalExpense;
+                availableBudget - totalExpense;
 
             // 月
             MonthLabel.Text =
@@ -96,8 +160,16 @@ namespace KakeiboApp
                 $"予算：¥{budgetAmount:N0}";
 
             // 使用額
-            BudgetUsedLabel.Text =
-                $"使用額：¥{totalExpense:N0}";
+            if (borrowedAmount > 0)
+            {
+                BudgetUsedLabel.Text =
+                    $"前借り：¥{borrowedAmount:N0} / 使用額：¥{totalExpense:N0}";
+            }
+            else
+            {
+                BudgetUsedLabel.Text =
+                    $"使用額：¥{totalExpense:N0}";
+            }
 
             // 残り
             BudgetRemainingLabel.Text =
@@ -111,6 +183,7 @@ namespace KakeiboApp
             _currentMonth =
                 _currentMonth.AddMonths(-1);
 
+            await UpdateBorrowedAmountAsync();
             await LoadMonthlyDataAsync();
         }
 
@@ -121,6 +194,7 @@ namespace KakeiboApp
             _currentMonth =
                 _currentMonth.AddMonths(1);
 
+            await UpdateBorrowedAmountAsync();
             await LoadMonthlyDataAsync();
         }
 

@@ -96,5 +96,31 @@ namespace KakeiboApp.Data
         {
             return await _database.UpdateAsync(budget);
         }
+       
+        // 前借り額を設定
+        public async Task<int> SetBorrowedAmountAsync(
+            int year,
+            int month,
+            decimal borrowedAmount)
+        {
+            var budget = await GetBudgetAsync(year, month);
+
+            if (budget == null)
+            {
+                budget = new Budget
+                {
+                    Year = year,
+                    Month = month,
+                    Amount = 0,
+                    BorrowedAmount = borrowedAmount
+                };
+
+                return await AddBudgetAsync(budget);
+            }
+
+            budget.BorrowedAmount = borrowedAmount;
+
+            return await UpdateBudgetAsync(budget);
+        }
     }
 }
