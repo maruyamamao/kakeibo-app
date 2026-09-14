@@ -77,21 +77,54 @@
 
 収入・支出・残高・予算状況を確認できます。
 
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/3df20952-bd60-4034-ad3e-8fadbeedfecd" width="200">
+  <img src="https://github.com/user-attachments/assets/e18e98dc-2fe7-452d-9c43-597f69969bcd" width="200">
+</div>
+
 ### 収入・支出登録
 
 金額、日付、カテゴリ、メモを登録できます。
+
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/41bc1930-f83d-4471-8945-14f335d917d7" width="200">
+  <img src="https://github.com/user-attachments/assets/d0da891a-c777-49d2-a1d4-2e83fe94db71" width="200">
+</div>
 
 ### 収支履歴
 
 登録した収支を一覧で確認し、編集・削除できます。
 
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/7611a14a-db48-46bd-ad5b-8f73d8b83ef5" width="200">
+  <img src="https://github.com/user-attachments/assets/5c997f3a-e733-42fc-9a46-f5eba930f4fb" width="200">
+</div>
+
 ### カテゴリ別集計
 
 カテゴリごとの支出額をグラフや一覧で確認できます。
 
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/52dab506-55ea-4c98-b0cb-4291dc49209f" width="200">
+</div>
+
 ### 予算設定
 
 月ごとの予算を設定できます。
+
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/420fc011-d88a-4b7c-90d3-ac803466d5aa" width="200">
+</div>
+
+### ⭐ 予算の繰り越し・前借り
+
+前月の予算を繰り越した場合や、翌月の予算を前借りした場合は、
+ホーム画面で金額と通知を確認できます。
+
+<div align="left">
+  <img src="https://github.com/user-attachments/assets/f0e44788-bc30-4d7a-b96f-473cb024c686" width="200">
+  <img src="https://github.com/user-attachments/assets/a04df56c-330d-4042-8b61-992e51064631" width="200">
+</div>
 
 ---
 
