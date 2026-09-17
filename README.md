@@ -122,6 +122,7 @@
 ホーム画面で金額と通知を確認できます。
 
 <div align="left">
+  <img width="200" alt="超過通知" src="https://github.com/user-attachments/assets/32f45e73-e26a-42a0-bed3-30254aa15efa" />
   <img width="200" alt="超過通知" src="https://github.com/user-attachments/assets/82785d82-4255-4570-a8c1-2cc985ec84f9" />
   <img width="200" alt="前借" src="https://github.com/user-attachments/assets/37876251-69f0-4d9b-9fbb-c70193be363e" />
 </div>
