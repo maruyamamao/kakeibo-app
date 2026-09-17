@@ -6,15 +6,11 @@
              BackgroundColor="#F5F9FC">
 
     <ScrollView>
-
         <VerticalStackLayout
             Padding="20,15,20,30"
             Spacing="16">
 
-            <!-- ========================= -->
             <!-- ヘッダー -->
-            <!-- ========================= -->
-
             <VerticalStackLayout
                 Spacing="2"
                 Margin="0,5,0,5">
@@ -26,19 +22,64 @@
                     TextColor="#1F2937" />
 
                 <Label
-                    Text="これまでの収入・支出を確認できます"
+                    Text="月ごとの収入・支出を確認できます"
                     FontSize="14"
                     TextColor="#7B8794" />
 
             </VerticalStackLayout>
 
-
-            <!-- ========================= -->
-            <!-- 履歴一覧 -->
-            <!-- ========================= -->
-
+            <!-- 月切り替え -->
             <Border
-                BackgroundColor="White"
+                BackgroundColor="#FFFFFF"
+                Stroke="#DDE7F0"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                Padding="12">
+
+                <Grid
+                    ColumnDefinitions="50,*,50"
+                    ColumnSpacing="8">
+
+                    <Button
+                        Text="‹"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        BackgroundColor="#EAF4FF"
+                        TextColor="#5B8DB8"
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        Clicked="OnPreviousMonthClicked" />
+
+                    <Label
+                        x:Name="MonthLabel"
+                        Text="2026年9月"
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#5B8DB8" />
+
+                    <Button
+                        Text="›"
+                        FontSize="28"
+                        FontAttributes="Bold"
+                        BackgroundColor="#EAF4FF"
+                        TextColor="#5B8DB8"
+                        CornerRadius="12"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        Grid.Column="2"
+                        Clicked="OnNextMonthClicked" />
+
+                </Grid>
+
+            </Border>
+
+            <!-- 履歴 -->
+            <Border
+                BackgroundColor="#FFFFFF"
                 Stroke="#DDE7F0"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 20"
@@ -48,14 +89,13 @@
                     x:Name="HistoryLayout"
                     Spacing="10">
 
-                    <!-- ここに収支履歴を表示する -->
+                    <!-- ここに収支履歴を表示 -->
 
                 </VerticalStackLayout>
 
             </Border>
 
         </VerticalStackLayout>
-
     </ScrollView>
 
 </ContentPage>

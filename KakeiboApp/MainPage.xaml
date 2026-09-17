@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="KakeiboApp.MainPage"
-             Title="家計簿"
+             Title="家計日和"
              BackgroundColor="#F5F9FC">
 
     <ScrollView>
@@ -18,12 +18,6 @@
             <VerticalStackLayout
                 Spacing="2"
                 Margin="0,5,0,5">
-
-                <Label
-                    Text="家計簿"
-                    FontSize="30"
-                    FontAttributes="Bold"
-                    TextColor="#1F2937" />
 
                 <Label
                     Text="今月の家計状況"
