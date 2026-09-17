@@ -78,8 +78,8 @@
 収入・支出・残高・予算状況を確認できます。
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/3df20952-bd60-4034-ad3e-8fadbeedfecd" width="200">
-  <img src="https://github.com/user-attachments/assets/e18e98dc-2fe7-452d-9c43-597f69969bcd" width="200">
+  <img width="200" alt="ホーム画面上側" src="https://github.com/user-attachments/assets/35e41cf9-2085-437d-8ed7-1b96fb9fd3b9" />
+  <img width="200" alt="ホーム画面下側" src="https://github.com/user-attachments/assets/4b0c45c0-3d34-44db-9d2b-ba250c67c6b0" />
 </div>
 
 ### 収入・支出登録
@@ -87,8 +87,8 @@
 金額、日付、カテゴリ、メモを登録できます。
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/41bc1930-f83d-4471-8945-14f335d917d7" width="200">
-  <img src="https://github.com/user-attachments/assets/d0da891a-c777-49d2-a1d4-2e83fe94db71" width="200">
+  <img width="200" alt="収入登録" src="https://github.com/user-attachments/assets/2157188c-834b-43cb-83ab-9485c240509b" />
+  <img width="200" alt="支出登録" src="https://github.com/user-attachments/assets/8098d66d-7243-4829-b2c1-ea8539b7a45d" />
 </div>
 
 ### 収支履歴
@@ -96,8 +96,8 @@
 登録した収支を一覧で確認し、編集・削除できます。
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/7611a14a-db48-46bd-ad5b-8f73d8b83ef5" width="200">
-  <img src="https://github.com/user-attachments/assets/5c997f3a-e733-42fc-9a46-f5eba930f4fb" width="200">
+  <img width="200" alt="収支履歴" src="https://github.com/user-attachments/assets/248677ec-7f33-4b46-8e72-e7e43ad8dfc3" />
+  <img width="200" alt="収支編集" src="https://github.com/user-attachments/assets/54e709e2-4f0b-43fe-bda7-8c7c2439b33b" />
 </div>
 
 ### カテゴリ別集計
@@ -105,7 +105,7 @@
 カテゴリごとの支出額をグラフや一覧で確認できます。
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/52dab506-55ea-4c98-b0cb-4291dc49209f" width="200">
+  <img width="200" alt="カテゴリ別集計" src="https://github.com/user-attachments/assets/4b3b94d8-3d7b-4262-8a8a-97d6b50c8f24" />
 </div>
 
 ### 予算設定
@@ -113,17 +113,17 @@
 月ごとの予算を設定できます。
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/420fc011-d88a-4b7c-90d3-ac803466d5aa" width="200">
+  <img width="200" alt="予算設定" src="https://github.com/user-attachments/assets/6eb73b95-5824-4b86-a2d1-9ea3d40b96eb" />
 </div>
 
-### ⭐ 予算の繰り越し・前借り
+### ⭐ 予算の超過・繰り越し・前借り
 
-前月の予算を繰り越した場合や、翌月の予算を前借りした場合は、
+当月の予算を超過した場合や、前月の予算を繰り越した場合、翌月の予算を前借りした場合は、
 ホーム画面で金額と通知を確認できます。
 
 <div align="left">
-  <img src="https://github.com/user-attachments/assets/f0e44788-bc30-4d7a-b96f-473cb024c686" width="200">
-  <img src="https://github.com/user-attachments/assets/a04df56c-330d-4042-8b61-992e51064631" width="200">
+  <img width="200" alt="超過通知" src="https://github.com/user-attachments/assets/82785d82-4255-4570-a8c1-2cc985ec84f9" />
+  <img width="200" alt="前借" src="https://github.com/user-attachments/assets/37876251-69f0-4d9b-9fbb-c70193be363e" />
 </div>
 
 ---
